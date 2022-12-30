@@ -1,0 +1,27 @@
+a.navbar-brand {
+  font-weight: bold;
+  text-align: center;
+  margin-left: -25px;
+  margin-right: -10px;
+}
+
+nav.navbar button.nav-link {
+  color: white;
+}
+
+nav.navbar button.nav-link:hover {
+  color: #c8c8c9;
+}
+
+#tablaVuelos,
+#tablaAutos,
+#tablaSolicitudVuelos,
+#tablaSolicitudAutos {
+  width: 72%;
+  margin: 0 auto;
+  margin-bottom: 30px;
+}
+
+#imageTurista {
+  padding: 0;
+}
