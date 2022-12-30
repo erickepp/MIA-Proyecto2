@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  backend:
+    image: 'erickepp/client'
+    container_name: 'client-React'
+    environment:
+      REACT_APP_SERVER_IP: 'http://44.203.41.67'
+      PORT: '80'
+    ports:
+      - '80:80'
+    restart: always
