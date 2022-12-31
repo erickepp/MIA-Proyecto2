@@ -1,14 +1,10 @@
 const { signInCognito, signUpCognito } = require('../middleware/cognito')
 const { uploadFile } = require('../middleware/s3')
 const fs = require('../middleware/fs')
-let usuarios = [];
-
-(async () => {
-    usuarios = await fs.read('usuarios.json')
-})()
 
 const login = async (req, res) => {
     const { usernameOrEmail, password } = req.body
+    const usuarios = await fs.read('usuarios.json')
     let user = null
 
     for (let i in usuarios) {
@@ -40,6 +36,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
     const { username, email } = req.body
+    const usuarios = await fs.read('usuarios.json')
 
     for (let i in usuarios) {
         if (usuarios[i].username === username || usuarios[i].email === email) {

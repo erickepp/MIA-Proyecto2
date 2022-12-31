@@ -26,10 +26,10 @@ function Login() {
 
         if (data.user.type === 'admin') {
           window.location.href = '/administrador'
-        } else if (data.user.type === 'turista') {
+        } else if (data.user.type === 'Turista') {
           window.location.href = '/turista'
         } else {
-          window.location.href = '/recepcionista'
+          window.location.href = '/Recepcionista'
         }
       } else {
         alert(data.msg)

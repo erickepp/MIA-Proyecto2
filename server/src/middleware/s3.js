@@ -24,6 +24,16 @@ async function uploadFile(file) {
     return await client.send(command)
 }
 
+async function deleteFile(fileName) {
+    const input = {
+        Bucket: AWS_BUCKET_NAME,
+        Key: fileName
+    }
+    const command = new DeleteObjectCommand(input)
+    return await client.send(command)
+}
+
 module.exports = {
-    uploadFile
+    uploadFile,
+    deleteFile
 }

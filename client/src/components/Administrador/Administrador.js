@@ -5,6 +5,37 @@ import axios from 'axios';
 function Administrador() {
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+  const [users, setUsers] = useState();
+
+  (async () => {
+    setUsers(await getUsers())
+  })()
+
+  async function getUsers () {
+    let usuarios = ''
+    const serverIP = process.env.REACT_APP_SERVER_IP
+    const { data } = await axios.get(`${serverIP}/usuarios`)
+    
+    data.users.forEach((element, index) => {
+      const { type, fullName, username, email } = element
+      usuarios += `
+        <tr id="${username}">
+          <td>${index + 1}</td>
+          <td>${type}</td>
+          <td>${fullName}</td>
+          <td>${username}</td>
+          <td>${email}</td>
+          <td>
+            <button class="btn btn-danger" onclick="deleteUser(${username})">
+              Eliminar
+            </button>
+          </td>
+        </tr>
+      `
+    })
+
+    return usuarios
+  }
 
   const handleSubmitUser = async (e) => {
     e.preventDefault()
@@ -29,7 +60,7 @@ function Administrador() {
 
       alert(data.msg)
       if (data.status) {
-        form.reset()
+        window.location.reload()
       }
     }
   }
@@ -114,13 +145,13 @@ function Administrador() {
               <form class="form mb-5" id="userForm" onSubmit={handleSubmitUser}>
                 <div class="mb-3">
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="flexRadioDefault1" value="turista" checked />
+                    <input class="form-check-input" type="radio" name="type" id="flexRadioDefault1" value="Turista" checked />
                     <label class="form-check-label" for="flexRadioDefault1">
                       Turista
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type" id="flexRadioDefault2" value="recepcionista" />
+                    <input class="form-check-input" type="radio" name="type" id="flexRadioDefault2" value="Recepcionista" />
                     <label class="form-check-label" for="flexRadioDefault2">
                       Recepcionista
                     </label>
@@ -166,7 +197,7 @@ function Administrador() {
                     <th scope="col"></th>
                   </tr>
                 </thead>
-                <tbody id="tbodyEliminarUsuarios"></tbody>
+                <tbody id="tbodyEliminarUsuarios" dangerouslySetInnerHTML={{ __html: users }} />
               </table>
             </div>
           </div>

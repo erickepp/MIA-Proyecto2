@@ -8,7 +8,7 @@ function Register() {
     
     const form = document.getElementById('form')
     const formData = new FormData(form)
-    formData.set('type', 'turista')
+    formData.set('type', 'Turista')
     const re = /^(?=.*\d)(?=.*[!"#$%&/()=?'@+*{[},;.:_-])(?=.*[a-z])(?=.*[A-Z]).{8,}$/
 
     if (!re.test(formData.get('password'))) {
