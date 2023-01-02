@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  backend:
+    image: 'erickepp/server'
+    container_name: 'server-NodeJS'
+    environment:
+      USER: ''
+      PASSWORD: ''
+      EMAIL: ''
+      PORT: '80'
+    ports:
+      - '80:80'
+    restart: always
